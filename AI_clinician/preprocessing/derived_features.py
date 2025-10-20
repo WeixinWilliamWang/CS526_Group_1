@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-from ai_clinician.preprocessing.columns import *
+from AI_clinician.preprocessing.columns import *
 
 def calculate_onset(abx, bacterio, stay_id, chart_events=None, lab_events=None):
     """

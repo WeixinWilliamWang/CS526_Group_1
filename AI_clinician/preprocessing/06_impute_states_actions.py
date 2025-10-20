@@ -4,11 +4,11 @@ import os
 import argparse
 from tqdm import tqdm
 # from ai_clinician.data_extraction.extract import PARENT_DIR
-from ai_clinician.preprocessing.columns import *
-from ai_clinician.preprocessing.provenance import ProvenanceWriter
-from ai_clinician.preprocessing.utils import load_csv
-from ai_clinician.preprocessing.imputation import fixgaps, knn_impute
-from ai_clinician.preprocessing.derived_features import compute_pao2_fio2, compute_shock_index, compute_sofa, compute_sirs
+from AI_clinician.preprocessing.columns import *
+from AI_clinician.preprocessing.provenance import ProvenanceWriter
+from AI_clinician.preprocessing.utils import load_csv
+from AI_clinician.preprocessing.imputation import fixgaps, knn_impute
+from AI_clinician.preprocessing.derived_features import compute_pao2_fio2, compute_shock_index, compute_sofa, compute_sirs
 
 PARENT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 

@@ -22,8 +22,8 @@ import pandas as pd
 from tqdm import tqdm
 import numpy as np
 
-from ai_clinician.preprocessing.columns import *
-from ai_clinician.preprocessing.utils import (
+from AI_clinician.preprocessing.columns import *
+from AI_clinician.preprocessing.utils import (
     load_csv,
     load_intermediate_or_raw_csv,
 )

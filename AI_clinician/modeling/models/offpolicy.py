@@ -1,5 +1,8 @@
+import numpy as np
 import tqdm
 from numba import jit
+from AI_clinician.modeling.columns import *
+from AI_clinician.preprocessing.columns import C_ICUSTAYID
 
 
 @jit(nopython=True)
