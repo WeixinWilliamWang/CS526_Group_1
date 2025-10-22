@@ -3,19 +3,19 @@ This module provides an adapter to the models developed by Killian et al.,
 included in this repo under the 'sota' module.
 """
 import numpy as np
-from ai_clinician.modeling.columns import C_OUTCOME
-from ai_clinician.modeling.models.base_ import BaseModel
-from ai_clinician.modeling.models.discrete_bcq import FC_BC, DiscreteBCQ
-from ai_clinician.modeling.models.sota import AE, AIS, CDE, DST, DDM, RNN, ODERNN
-from ai_clinician.preprocessing.columns import *
+from AI_clinician.modeling.columns import C_OUTCOME
+from AI_clinician.modeling.models.base_ import BaseModel
+from AI_clinician.modeling.models.discrete_bcq import FC_BC, DiscreteBCQ
+from AI_clinician.modeling.models.sota import AE, AIS, CDE, DST, DDM, RNN, ODERNN
+from AI_clinician.preprocessing.columns import *
 from itertools import chain
 import torch
 import torch.nn.functional as F
 from torch.utils.data import TensorDataset, DataLoader
-from ai_clinician.preprocessing.derived_features import compute_oasis, compute_sapsii
-from ai_clinician.modeling.models.sota.common import mask_from_lengths
-from ai_clinician.modeling.models.sota.NeuralCDE.metamodel import NeuralCDE
-from ai_clinician.modeling.models.sota.NeuralCDE import controldiffeq
+from AI_clinician.preprocessing.derived_features import compute_oasis, compute_sapsii
+from AI_clinician.modeling.models.sota.common import mask_from_lengths
+from AI_clinician.modeling.models.sota.NeuralCDE.metamodel import NeuralCDE
+from AI_clinician.modeling.models.sota.NeuralCDE import controldiffeq
 
 SOTA_DEM_COLS = [C_GENDER, C_MECHVENT, C_RE_ADMISSION, C_AGE, C_WEIGHT]
 SOTA_OBS_COLS = [

@@ -1,10 +1,17 @@
+import numpy as np
+import pandas as pd
+import tqdm
 import argparse
 import os
+import shutil
+import pickle
+from AI_clinician.modeling.models.komorowski_model import *
+from AI_clinician.modeling.models.common import *
 from AI_clinician.modeling.columns import C_OUTCOME
-from AI_clinician.preprocessing import load_csv
+from AI_clinician.preprocessing.utils import load_csv
+from AI_clinician.preprocessing.columns import *
+from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
-
-tqdm.tqdm.pandas()
 
 if __name__ == '__main__':
 
@@ -181,9 +188,16 @@ if __name__ == '__main__':
     records_no_hidden = records.loc[records.loc[:, C_ACTION] != -1, :]
 
     qldata[:, :2] = records_no_hidden[[C_ICUSTAYID, C_OUTCOME]]
-    qldata[:, 3] = MIMICraw[C_INPUT_STEP] - np.array(action_medians[0])[optimal_action[records_no_hidden[C_STATE].to_numpy()] // len(action_bins[1])]
-    qldata[:, 2] = MIMICraw[C_MAX_DOSE_VASO] - np.array(action_medians[1])[optimal_action[records_no_hidden[C_STATE].to_numpy()] % len(action_bins[1])]
-    
+    # qldata[:, 3] = MIMICraw[C_INPUT_STEP] - np.array(action_medians[0])[optimal_action[records_no_hidden[C_STATE].to_numpy()] // len(action_bins[1])]
+    idx = records_no_hidden.index
+    qldata[:, 3] = np.nan
+    bin0 = optimal_action[records_no_hidden[C_STATE].to_numpy()] // len(action_bins[1])
+    median0 = np.asarray(action_medians[0])[bin0]
+    left = MIMICraw.loc[idx, C_INPUT_STEP].to_numpy()
+    right = median0
+    qldata[:, 3] = left - right
+
+    qldata[:, 2] = MIMICraw.loc[idx, C_MAX_DOSE_VASO] - np.array(action_medians[1])[optimal_action[records_no_hidden[C_STATE].to_numpy()] % len(action_bins[1])]
     r = pd.DataFrame(qldata)
     r.columns = ['id','morta','vaso','ivf']
     d = r.groupby('id').agg(['mean','median','sum'])
@@ -196,7 +210,7 @@ if __name__ == '__main__':
 
     print('Sampling and computing mean mortality for Intravenous Fluids...')
     for rep in tqdm.tqdm(range(nr_reps)):
-        ii = np.floor(np.random.rand(len(p)) + prop)
+        ii = np.floor(np.random.rand(d3.shape[0]) + prop)
         d4 = d3[ii == 1, :]
 
         iv_mean_sum = []
@@ -213,6 +227,8 @@ if __name__ == '__main__':
 
     print('Sampling and computing mean mortality for Vasopressors...')
     for rep in tqdm.tqdm(range(nr_reps)):
+        ii = np.floor(np.random.rand(d3.shape[0]) + prop)
+        d4 = d3[ii == 1, :]
         vp_mean_sum = []
         for i in range(len(vp_ticks) - 1):
             ii = (d4[:, 3] >= vp_ticks[i]) & (d4[:, 3] <= vp_ticks[i + 1])

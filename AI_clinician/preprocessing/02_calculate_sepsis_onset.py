@@ -14,13 +14,13 @@ import os
 import pandas as pd
 from tqdm import tqdm
 
-from ai_clinician.preprocessing.columns import (
+from AI_clinician.preprocessing.columns import (
     C_ICUSTAYID, C_CHARTTIME, C_STARTDATE
 )
-from ai_clinician.preprocessing.utils import (
+from AI_clinician.preprocessing.utils import (
     load_csv, load_intermediate_or_raw_csv
 )
-from ai_clinician.preprocessing.derived_features import calculate_onset
+from AI_clinician.preprocessing.derived_features import calculate_onset
 
 # ─────────────────────────────────────────────────────────────────── #
 #  Helpers                                                            #

@@ -22,14 +22,14 @@ import numpy as np
 import pandas as pd
 from tqdm import tqdm
 
-from ai_clinician.preprocessing.columns import *         # noqa: F403
-from ai_clinician.preprocessing.imputation import (
+from AI_clinician.preprocessing.columns import *         # noqa: F403
+from AI_clinician.preprocessing.imputation import (
     fill_outliers,
     fill_stepwise,
     sample_and_hold,
 )
-from ai_clinician.preprocessing.provenance import ProvenanceWriter
-from ai_clinician.preprocessing.utils import load_csv
+from AI_clinician.preprocessing.provenance import ProvenanceWriter
+from AI_clinician.preprocessing.utils import load_csv
 
 # --------------------------------------------------------------------- #
 #  Paths                                                                #

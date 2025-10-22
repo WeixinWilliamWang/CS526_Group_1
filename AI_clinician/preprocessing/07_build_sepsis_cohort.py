@@ -3,8 +3,8 @@ import numpy as np
 import os
 import argparse
 import tqdm
-from ai_clinician.preprocessing.columns import *
-from ai_clinician.preprocessing.utils import load_csv
+from AI_clinician.preprocessing.columns import *
+from AI_clinician.preprocessing.utils import load_csv
 
 PARENT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
