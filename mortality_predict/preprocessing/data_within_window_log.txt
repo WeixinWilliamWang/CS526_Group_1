@@ -1,0 +1,18 @@
+TIME_WINDOW_IN_HOUR: 24
+original data row count: 311780
+data row count within first 24 hours of each ICU stay: 156119
+icustayid count: 22562
+average rows per icustayid: 6.9
+
+TIME_WINDOW_IN_HOUR: 48
+original data row count: 311780
+data row count within first 48 hours of each ICU stay: 159551
+icustayid count: 12402
+average rows per icustayid: 12.9
+
+TIME_WINDOW_IN_HOUR: 72
+original data row count: 311780
+data row count within first 72 hours of each ICU stay: 52842
+icustayid count: 2804
+average rows per icustayid: 18.8
+
