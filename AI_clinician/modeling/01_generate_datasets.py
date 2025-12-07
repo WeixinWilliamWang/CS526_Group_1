@@ -2,8 +2,17 @@ import tqdm
 import argparse
 import os
 from AI_clinician.modeling.normalization import DataNormalization
-from AI_clinician.preprocessing import load_csv
+# from AI_clinician.preprocessing import load_csv
+from AI_clinician.modeling.models.common import *
+from AI_clinician.preprocessing.columns import *
+from AI_clinician.modeling.columns import C_OUTCOME
+from AI_clinician.preprocessing.utils import load_csv
 from sklearn.model_selection import train_test_split
+import pandas as pd
+from sklearn.experimental import enable_iterative_imputer  # 启用 MICE
+from sklearn.impute import IterativeImputer
+from sklearn.preprocessing import StandardScaler
+
 
 tqdm.tqdm.pandas()
 
@@ -53,9 +62,35 @@ if __name__ == '__main__':
 
     print("Proportion of NA values:", MIMICraw.isna().sum() / len(MIMICraw))
 
-    normer = DataNormalization(MIMICtable.iloc[train_indexes])
-    MIMICzs_train = normer.transform(MIMICtable.iloc[train_indexes])
-    MIMICzs_test = normer.transform(MIMICtable.iloc[test_indexes])
+    # normer = DataNormalization(MIMICtable.iloc[train_indexes])
+    # MIMICzs_train = normer.transform(MIMICtable.iloc[train_indexes])
+    # MIMICzs_test = normer.transform(MIMICtable.iloc[test_indexes])
+
+
+    print("Separating train/test features for imputation...")
+    MIMICraw_train = MIMICraw.iloc[train_indexes]
+    MIMICraw_test = MIMICraw.iloc[test_indexes]
+
+    print("Running MICE imputation (IterativeImputer)...")
+    # MICE
+    imputer = IterativeImputer(max_iter=10, random_state=0)
+    imputer.fit(MIMICraw_train)
+    MIMIC_imputed_train_array = imputer.transform(MIMICraw_train)
+    MIMIC_imputed_test_array = imputer.transform(MIMICraw_test)
+
+    print("Running Z-score normalization (StandardScaler)...")
+
+    # Z-score
+    scaler = StandardScaler()
+    scaler.fit(MIMIC_imputed_train_array)
+    MIMICzs_train_array = scaler.transform(MIMIC_imputed_train_array)
+    MIMICzs_test_array = scaler.transform(MIMIC_imputed_test_array)
+
+    print("Converting arrays back to DataFrames...")
+    MIMICzs_train = pd.DataFrame(MIMICzs_train_array, columns=MIMICraw_train.columns, index=MIMICraw_train.index)
+    MIMICzs_test = pd.DataFrame(MIMICzs_test_array, columns=MIMICraw_test.columns, index=MIMICraw_test.index)
+
+    print("Imputation and normalization complete.")
 
     train_dir = os.path.join(out_dir, "train")
     test_dir = os.path.join(out_dir, "test")
@@ -68,7 +103,7 @@ if __name__ == '__main__':
     
     # Save files
     print("Saving files")
-    normer.save(os.path.join(out_dir, 'normalization.pkl'))
+    # normer.save(os.path.join(out_dir, 'normalization.pkl'))
     save_data_files(train_dir,
                     MIMICraw.iloc[train_indexes],
                     MIMICzs_train,
