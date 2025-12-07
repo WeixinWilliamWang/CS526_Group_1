@@ -1,0 +1,28 @@
+Sample size: 2804
+
+Best model: LogisticRegression(C=0.1, class_weight='balanced', max_iter=1000, penalty='l1',
+                   random_state=42, solver='liblinear')
+
+Training set performance:
+    - Accuracy rate: 0.8034
+    - AUROC: 0.8826
+    - AUPRC: 0.6632
+
+Testing set performance:
+    - Accuracy rate: 0.7398
+    - AUC: 0.8025
+    - AUPRC: 0.5663
+
+Classification Report (Test Set):
+              precision    recall  f1-score   support
+
+    survival       0.90      0.75      0.82       443
+       death       0.43      0.70      0.53       118
+
+    accuracy                           0.74       561
+   macro avg       0.67      0.73      0.68       561
+weighted avg       0.80      0.74      0.76       561
+
+Confusion matrix (test set):
+[[332 111]
+ [ 35  83]]

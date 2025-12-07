@@ -1,0 +1,46 @@
+Sample size: 2804
+
+Best model: XGBClassifier(base_score=None, booster=None, callbacks=None,
+              colsample_bylevel=None, colsample_bynode=None,
+              colsample_bytree=0.9705591301059493, device=None,
+              early_stopping_rounds=None, enable_categorical=False,
+              eval_metric='aucpr', feature_types=None, feature_weights=None,
+              gamma=0.42474224467462063, grow_policy=None, importance_type=None,
+              interaction_constraints=None, learning_rate=0.012363292747601591,
+              max_bin=None, max_cat_threshold=None, max_cat_to_onehot=None,
+              max_delta_step=4, max_depth=3, max_leaves=None,
+              min_child_weight=5, missing=nan, monotone_constraints=None,
+              multi_strategy=None, n_estimators=200, n_jobs=None,
+              num_parallel_tree=None, ...)
+
+Training set performance:
+    - Accuracy rate: 0.8243
+    - AUC-ROC: 0.9147
+    - AUPRC: 0.7714
+              precision    recall  f1-score   support
+
+           0       0.95      0.82      0.88      1772
+           1       0.56      0.82      0.66       471
+
+    accuracy                           0.82      2243
+   macro avg       0.75      0.82      0.77      2243
+weighted avg       0.86      0.82      0.84      2243
+
+Testing set performance:
+    - Accuracy rate: 0.7487
+    - AUC-ROC: 0.7683
+    - AUPRC: 0.5458
+              precision    recall  f1-score   support
+
+           0       0.88      0.79      0.83       443
+           1       0.43      0.61      0.51       118
+
+    accuracy                           0.75       561
+   macro avg       0.66      0.70      0.67       561
+weighted avg       0.79      0.75      0.76       561
+
+Overfitting gap (AUC): 0.1464
+
+Confusion matrix (test set):
+[[348  95]
+ [ 46  72]]

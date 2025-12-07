@@ -1,0 +1,48 @@
+Sample size: 22562
+
+Best model: RandomForestClassifier(class_weight='balanced', criterion='entropy',
+                       max_depth=5, max_features=0.5,
+                       max_samples=0.7540910468996158,
+                       min_impurity_decrease=0.0014950249357521775,
+                       min_samples_leaf=6, min_samples_split=10,
+                       n_estimators=700, n_jobs=-1, oob_score=True,
+                       random_state=42)
+
+Training set performance:
+    - Accuracy rate: 0.7843
+    - AUROC: 0.8423
+    - AUPRC: 0.5711
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.93      0.80      0.86     15012
+           1       0.42      0.71      0.53      3037
+
+    accuracy                           0.78     18049
+   macro avg       0.67      0.76      0.69     18049
+weighted avg       0.85      0.78      0.80     18049
+
+Testing set performance:
+    - Accuracy rate: 0.7662
+    - AUROC: 0.8160
+    - AUCPR: 0.5154
+    - Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.93      0.78      0.85      3753
+           1       0.39      0.69      0.50       760
+
+    accuracy                           0.77      4513
+   macro avg       0.66      0.74      0.67      4513
+weighted avg       0.84      0.77      0.79      4513
+
+Confusion Matrix (Test Set):
+  True Negative (TN): 2931, False Positive (FP): 822
+  False Negative (FN): 233, True Positive (TP): 527
+
+Detailed Performance Metrics:
+  Sensitivity (Recall): 0.693
+  Specificity: 0.781
+  Precision: 0.391
+  Negative Predictive Value (NPV): 0.926
